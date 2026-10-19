@@ -1,0 +1,222 @@
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { siteConfig } from "../data";
+import { MapPin, Phone, Mail } from "lucide-react";
+
+const NEWS_KEY = "os_newsletter";
+
+export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [newsMsg, setNewsMsg] = useState({ type: "", text: "" });
+
+  const goSection = (id) => {
+    const doScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 155;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    };
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      setTimeout(doScroll, 350);
+    } else {
+      doScroll();
+    }
+  };
+
+  const subscribe = (e) => {
+    e.preventDefault();
+    const v = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+      setNewsMsg({ type: "error", text: "Sahi email address dalo." });
+      return;
+    }
+    try {
+      const list = JSON.parse(localStorage.getItem(NEWS_KEY) || "[]");
+      if (!list.includes(v)) {
+        list.push(v);
+        localStorage.setItem(NEWS_KEY, JSON.stringify(list));
+      }
+    } catch (err) {}
+    setEmail("");
+    setNewsMsg({ type: "ok", text: "Subscribed! Offers sabse pehle aapko milenge." });
+  };
+  return (
+    <footer className="bg-[#1a1a1a] text-[#a8a8a8]">
+      {/* Newsletter - XStore */}
+      <div className="border-b border-[#2a2a2a]">
+        <div className="max-w-[1440px] mx-auto px-4 py-6 flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#2a2a2a] rounded-full flex items-center justify-center text-white">✉️</div>
+            <div>
+              <h4 className="text-white text-sm font-bold">Sign up to Newsletter & Follow us</h4>
+              <p className="text-xs text-[#a8a8a8]">Get updates by subscribe our weekly newsletter</p>
+            </div>
+          </div>
+          <form onSubmit={subscribe} className="flex w-full lg:w-auto max-w-md flex-1 lg:ml-8">
+            <input
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setNewsMsg({ type: "", text: "" }); }}
+              placeholder="Your email address..."
+              type="text"
+              inputMode="email"
+              className="flex-1 h-10 px-4 bg-white text-sm text-[#1a1a1a] rounded-l outline-none"
+            />
+            <button className="bg-[#16a34a] hover:bg-[#15803d] text-white px-6 text-xs font-bold tracking-widest rounded-r">SUBSCRIBE</button>
+          </form>
+          {newsMsg.text && (
+            <p className={`text-xs w-full lg:w-auto ${newsMsg.type === "ok" ? "text-green-400" : "text-red-400"}`}>
+              {newsMsg.text}
+            </p>
+          )}
+          <div className="flex items-center gap-2 text-xs">
+            <span className="hidden lg:inline text-[#a8a8a8]">Follow:</span>
+            <a href="https://wa.me/919355701335" target="_blank" rel="noopener noreferrer" title="WhatsApp" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white text-xs transition-colors">WA</a>
+            <a href="tel:+919355701335" title="Call karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+              <Phone className="w-3.5 h-3.5" />
+            </a>
+            <a href="mailto:organicswaad1@gmail.com" title="Email karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+              <Mail className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Features Banner - XStore style but with Mr & Mrs Masala green */}
+      <div className="bg-[#232323] border-b border-[#2a2a2a] py-6">
+        <div className="max-w-[1440px] mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center text-white">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-xl">🌶️</span>
+              <h4 className="font-bold text-xs uppercase tracking-widest">Variety</h4>
+              <p className="text-xs text-[#a8a8a8]">is the spice of love</p>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-xl">✅</span>
+              <h4 className="font-bold text-xs uppercase tracking-widest">Best Quality</h4>
+              <p className="text-xs text-[#a8a8a8]">100% Guarantee</p>
+            </div>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-xl">🌿</span>
+              <h4 className="font-bold text-xs uppercase tracking-widest">Farm Fresh</h4>
+              <p className="text-xs text-[#a8a8a8]">Freshly Ground Daily</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer - XStore 3 cols */}
+      <div className="max-w-[1440px] mx-auto px-4 py-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* About - preserve images */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-3">
+              <img src="/sitelogo.jpeg" alt="Mr & Mrs Masala" className="h-9 w-9 object-cover rounded-md border border-white/20 bg-[#f7efdd]" />
+              <div>
+                <span className="font-['Cormorant_Garamond'] text-lg font-bold text-white">Mr & Mrs Masala</span>
+                <span className="block text-[9px] text-[#a8a8a8] tracking-wider uppercase">100% Organic Masala</span>
+              </div>
+            </div>
+            <p className="text-xs leading-relaxed text-[#a8a8a8] mb-4">
+              100% organic masale, sahi daam par — seedha aapke ghar tak.
+            </p>
+            <div className="space-y-2 text-xs">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#16a34a] mt-0.5" />
+                <span>{siteConfig.address}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-3.5 h-3.5 text-[#16a34a]" />
+                <a href="tel:+919355701335" className="hover:text-white">
+                  +91-9355701335
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#16a34a]" />
+                <a href="mailto:organicswaad1@gmail.com" className="hover:text-white">
+                  organicswaad1@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Useful Link */}
+          <div>
+            <h4 className="font-bold text-white text-xs mb-4 uppercase tracking-widest">Useful Link</h4>
+            <nav className="space-y-2 text-xs">
+              <Link to="/shipping" className="block hover:text-white transition-colors">
+                Fast Shipping
+              </Link>
+              <Link to="/products" className="block hover:text-white transition-colors">
+                All Products
+              </Link>
+              <Link to="/terms" className="block hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/refunds" className="block hover:text-white transition-colors">
+                Returns and Refunds
+              </Link>
+              <Link to="/privacy-policy" className="block hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+            </nav>
+          </div>
+
+          {/* Customer Service */}
+          <div>
+            <h4 className="font-bold text-white text-xs mb-4 uppercase tracking-widest">Customer Service</h4>
+            <nav className="space-y-2 text-xs">
+              <button onClick={() => goSection("why-us")} className="block hover:text-white transition-colors">
+                Why Us
+              </button>
+              <button onClick={() => goSection("testimonials")} className="block hover:text-white transition-colors">
+                Reviews
+              </button>
+              <button onClick={() => goSection("contact")} className="block hover:text-white transition-colors">
+                Contact Us
+              </button>
+              <Link to="/track-order" className="block hover:text-white transition-colors">
+                Track Order
+              </Link>
+            </nav>
+            <div className="mt-6">
+              <h5 className="text-white text-xs font-bold uppercase tracking-widest mb-2">Payment Methods</h5>
+              <div className="flex gap-1 flex-wrap opacity-80">
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">VISA</span>
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">MC</span>
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">PAYPAL</span>
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">UPI</span>
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">COD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Copyright - XStore */}
+      <div className="border-t border-[#2a2a2a]">
+        <div className="max-w-[1440px] mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-[#777]">
+          <p>Copyright © 2026 {siteConfig.brand.name}. All Rights Reserved.</p>
+          <div className="flex items-center gap-3">
+            <Link to="/privacy-policy" className="hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-white">
+              Terms
+            </Link>
+            <Link to="/refunds" className="hover:text-white">
+              Refunds
+            </Link>
+            <Link to="/admin" className="hover:text-white">
+              Admin
+            </Link>
+            <span>Made with ❤️ in India</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

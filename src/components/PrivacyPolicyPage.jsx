@@ -174,7 +174,6 @@ export default function PrivacyPolicyPage() {
         <p className="font-semibold text-[#1a1a1a] mb-1">Related policies</p>
         <p className="flex flex-wrap gap-4">
           <Link to="/terms" className="text-[#16a34a] font-semibold hover:underline">Terms of Service</Link>
-          <Link to="/refunds" className="text-[#16a34a] font-semibold hover:underline">Refund &amp; Cancellation Policy</Link>
           <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping Policy</Link>
           <Link to="/#contact" className="text-[#16a34a] font-semibold hover:underline">Contact Us</Link>
         </p>

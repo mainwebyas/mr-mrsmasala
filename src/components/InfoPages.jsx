@@ -114,10 +114,10 @@ export function TermsPage() {
       />
 
       <Point
-        heading="Shipping aur returns"
+        heading="Shipping"
         text={
           <>
-            Delivery ka tareeka aur waqt: <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping Policy</Link> page dekho. Returns, refund aur unki conditions: <Link to="/refunds" className="text-[#16a34a] font-semibold hover:underline">Refund &amp; Cancellation Policy</Link> page dekho. Ye dono in Terms ka hissa hai.
+            Delivery ka tareeka, charges aur waqt: <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping Policy</Link> page dekho. Ye Shipping Policy in Terms ka hissa hai.
           </>
         }
       />
@@ -160,69 +160,6 @@ export function TermsPage() {
         text={
           <>
             In Terms se judi sawaal: <a href="mailto:mrandmrsmasala9355@gmail.com" className="text-[#16a34a] font-semibold hover:underline">mrandmrsmasala9355@gmail.com</a> ya WhatsApp/Call <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a>. Business name &amp; address: <Ph>["LEGAL BUSINESS NAME AND ADDRESS — TO BE ADDED]</Ph>
-          </>
-        }
-      />
-    </InfoLayout>
-  );
-}
-
-export function RefundsPage() {
-  return (
-    <InfoLayout title="Refund and Cancellation Policy" subtitle="Seedhi aur imaandaar policy — padh lo, confusion khatam.">
-      <p className="text-xs text-gray-400">
-        Effective date: <Ph>["DD Month YYYY" — TO BE ADDED]</Ph> · Last updated: <Ph>["DD Month YYYY" — TO BE ADDED]</Ph>
-      </p>
-
-      <Point
-        heading="Order cancellation"
-        text="Dispatch se pehle tak order free cancel ho jata hai — WhatsApp (+91-9355701335) ya call par bas order number bata do. Dispatch ke baad cancellation possible nahi hai (product aapko bheja ja chuka hai)."
-      />
-
-      <Point
-        heading="Return eligibility"
-        text="Return tabhi hoga jab product galat ho, damaged ho ya description se alag ho. Aapke liye zaruri: order number, parcel ka photo (delivery waqt se pehle/andar kholte waqt), aur product ka photo — 48 hours ke andar WhatsApp par bhejo."
-      />
-
-      <Point
-        heading="Khula packet return nahi hoga"
-        text="Food safety ki wajah se seal khulne / packet open hone ke baad return ya refund possible nahi hai. Isliye order karte waqt pack size dhyaan se chuno."
-      />
-
-      <Point
-        heading="Galat ya damaged product aaye to?"
-        text="Agar galat item aaye, seal-damaged packet mile ya transit me nuksaan ho — to 48 hours ke andar WhatsApp (+91-9355701335) par order number aur photo bhejo. Verification ke baad replacement ya refund milega."
-      />
-
-      <Point
-        heading="Refund kaise milega"
-        text="Approved refund 5–7 working days me wapas ho jata hai — online payment par same source me, COD order par UPI/bank transfer se. Refund ka status hum WhatsApp ya email par batate hai."
-      />
-
-      <Point
-        heading="Non-refundable cheezein"
-        text="Khule/seal-open food items (hygiene), gift/custom orders, aur discount-bought items jinki kharabi ki shikayat verify na ho — ye refund ke liye eligible nahi hain. Ye list zaruri hai kyunki food products return hone par dobara sell nahi kiye ja sakte."
-      />
-
-      <Point
-        heading="Exchange"
-        text="Galat/damaged product ki jagah replacement (same item sahi pack me, ya galat item sahi item se) bhi mil sakta hai — aapko choice hai: refund ya replacement."
-      />
-
-      <Point
-        heading="Refund nahi mila to?"
-        text={
-          <>
-            Agar 5–7 working days ke baad bhi refund na mile — seedha WhatsApp ya call karo (+91-9355701335), order number ke saath. Escalation: <Ph>["Escalation contact/grievance officer — TO BE ADDED]</Ph>
-          </>
-        }
-      />
-
-      <Point
-        heading="Contact"
-        text={
-          <>
-            Refund/cancellation sawaal: <a href="mailto:mrandmrsmasala9355@gmail.com" className="text-[#16a34a] font-semibold hover:underline">mrandmrsmasala9355@gmail.com</a> · WhatsApp/Call: <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a> · Details: <Link to="/terms" className="text-[#16a34a] font-semibold hover:underline">Terms</Link> | <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping</Link> | <Link to="/privacy-policy" className="text-[#16a34a] font-semibold hover:underline">Privacy Policy</Link>
           </>
         }
       />

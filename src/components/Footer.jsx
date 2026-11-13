@@ -156,9 +156,6 @@ export default function Footer() {
               <Link to="/terms" className="block hover:text-white transition-colors">
                 Terms of Service
               </Link>
-              <Link to="/refunds" className="block hover:text-white transition-colors">
-                Returns and Refunds
-              </Link>
               <Link to="/privacy-policy" className="block hover:text-white transition-colors">
                 Privacy Policy
               </Link>
@@ -207,9 +204,6 @@ export default function Footer() {
             </Link>
             <Link to="/terms" className="hover:text-white">
               Terms
-            </Link>
-            <Link to="/refunds" className="hover:text-white">
-              Refunds
             </Link>
             <Link to="/admin" className="hover:text-white">
               Admin

@@ -14,7 +14,7 @@ import ProductsPage from "./components/ProductsPage";
 import ProductDetail from "./components/ProductDetail";
 import Footer from "./components/Footer";
 import CartSidebar from "./components/CartSidebar";
-import { ShippingPage, TermsPage, RefundsPage, TrackOrderPage } from "./components/InfoPages";
+import { ShippingPage, TermsPage, TrackOrderPage } from "./components/InfoPages";
 import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
 import AccountPage from "./components/AccountPage";
 import AdminPanel from "./components/AdminPanel";
@@ -84,7 +84,6 @@ const ROUTE_TITLES = {
   "/products": "All Products | Mr & Mrs Masala",
   "/shipping": "Shipping Policy | Mr & Mrs Masala",
   "/terms": "Terms of Service | Mr & Mrs Masala",
-  "/refunds": "Refund and Cancellation Policy | Mr & Mrs Masala",
   "/privacy-policy": "Privacy Policy | Mr & Mrs Masala",
   "/track-order": "Track Order | Mr & Mrs Masala",
   "/account": "My Account | Mr & Mrs Masala",
@@ -119,7 +118,6 @@ function App() {
               <Route path="/product/:slug" element={<ProductDetail />} />
               <Route path="/shipping" element={<ShippingPage />} />
               <Route path="/terms" element={<TermsPage />} />
-              <Route path="/refunds" element={<RefundsPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
               <Route path="/track-order" element={<TrackOrderPage />} />
               <Route path="/account" element={<AccountPage />} />

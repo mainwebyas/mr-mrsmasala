@@ -83,7 +83,7 @@ export default function Contact() {
           </a>
 
           <a
-            href="mailto:organicswaad1@gmail.com"
+            href="mailto:mrandmrsmasala9355@gmail.com"
             className="group flex items-center gap-4 bg-white px-8 py-5 rounded-2xl border border-gray-100 hover:border-green-300 hover:shadow-xl transition-all duration-300"
           >
             <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center group-hover:bg-green-100 transition-colors">
@@ -91,7 +91,7 @@ export default function Contact() {
             </div>
             <div className="text-left">
               <p className="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">Email</p>
-              <p className="text-sm text-gray-400">organicswaad1@gmail.com</p>
+              <p className="text-sm text-gray-400">mrandmrsmasala9355@gmail.com</p>
             </div>
           </a>
         </div>

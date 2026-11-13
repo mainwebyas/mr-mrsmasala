@@ -163,7 +163,7 @@ export default function PrivacyPolicyPage() {
           Data se judi koi bhi sawaal/hataane ka anurodh ke liye:
         </p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Email: <a href="mailto:organicswaad1@gmail.com" className="text-[#16a34a] font-semibold hover:underline">organicswaad1@gmail.com</a> <Ph>["Confirm support email — TO BE CONFIRMED]</Ph></li>
+          <li>Email: <a href="mailto:mrandmrsmasala9355@gmail.com" className="text-[#16a34a] font-semibold hover:underline">mrandmrsmasala9355@gmail.com</a></li>
           <li>WhatsApp/Phone: <a href="https://wa.me/919355701335" target="_blank" rel="noopener noreferrer" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a> <Ph>["Confirm contact number — TO BE CONFIRMED]</Ph></li>
           <li>Business name &amp; address: <Ph>["Legal business name and postal address — TO BE ADDED]</Ph></li>
           <li>Grievance Officer: <Ph>["Name &amp; contact of Grievance Officer (if applicable under Indian law) — TO BE ADDED]</Ph></li>

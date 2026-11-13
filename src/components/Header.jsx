@@ -126,7 +126,7 @@ export default function Header() {
               <Phone className="w-3 h-3" /> +91-9355701335
             </span>
             <span className="hidden lg:flex items-center gap-1.5">
-              <Mail className="w-3 h-3" /> organicswaad1@gmail.com
+              <Mail className="w-3 h-3" /> mrandmrsmasala9355@gmail.com
             </span>
           </div>
           <div className="flex items-center gap-4">

@@ -159,7 +159,7 @@ export function TermsPage() {
         heading="Contact"
         text={
           <>
-            In Terms se judi sawaal: <a href="mailto:organicswaad1@gmail.com" className="text-[#16a34a] font-semibold hover:underline">organicswaad1@gmail.com</a> ya WhatsApp/Call <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a>. Business name &amp; address: <Ph>["LEGAL BUSINESS NAME AND ADDRESS — TO BE ADDED]</Ph>
+            In Terms se judi sawaal: <a href="mailto:mrandmrsmasala9355@gmail.com" className="text-[#16a34a] font-semibold hover:underline">mrandmrsmasala9355@gmail.com</a> ya WhatsApp/Call <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a>. Business name &amp; address: <Ph>["LEGAL BUSINESS NAME AND ADDRESS — TO BE ADDED]</Ph>
           </>
         }
       />
@@ -222,7 +222,7 @@ export function RefundsPage() {
         heading="Contact"
         text={
           <>
-            Refund/cancellation sawaal: <a href="mailto:organicswaad1@gmail.com" className="text-[#16a34a] font-semibold hover:underline">organicswaad1@gmail.com</a> · WhatsApp/Call: <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a> · Details: <Link to="/terms" className="text-[#16a34a] font-semibold hover:underline">Terms</Link> | <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping</Link> | <Link to="/privacy-policy" className="text-[#16a34a] font-semibold hover:underline">Privacy Policy</Link>
+            Refund/cancellation sawaal: <a href="mailto:mrandmrsmasala9355@gmail.com" className="text-[#16a34a] font-semibold hover:underline">mrandmrsmasala9355@gmail.com</a> · WhatsApp/Call: <a href="tel:+919355701335" className="text-[#16a34a] font-semibold hover:underline">+91-9355701335</a> · Details: <Link to="/terms" className="text-[#16a34a] font-semibold hover:underline">Terms</Link> | <Link to="/shipping" className="text-[#16a34a] font-semibold hover:underline">Shipping</Link> | <Link to="/privacy-policy" className="text-[#16a34a] font-semibold hover:underline">Privacy Policy</Link>
           </>
         }
       />

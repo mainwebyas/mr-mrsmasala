@@ -78,7 +78,7 @@ export default function Footer() {
             <a href="tel:+919355701335" title="Call karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
               <Phone className="w-3.5 h-3.5" />
             </a>
-            <a href="mailto:organicswaad1@gmail.com" title="Email karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+            <a href="mailto:mrandmrsmasala9355@gmail.com" title="Email karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
               <Mail className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -136,8 +136,8 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#16a34a]" />
-                <a href="mailto:organicswaad1@gmail.com" className="hover:text-white">
-                  organicswaad1@gmail.com
+                <a href="mailto:mrandmrsmasala9355@gmail.com" className="hover:text-white">
+                  mrandmrsmasala9355@gmail.com
                 </a>
               </div>
             </div>

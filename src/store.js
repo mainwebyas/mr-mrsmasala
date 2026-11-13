@@ -88,7 +88,7 @@ export function logoutUser() {
 }
 
 // ---------- Orders ----------
-export function createOrder({ items, total, name, mobile, address, pincode, payment }) {
+export function createOrder({ items, total, name, mobile, address, pincode, payment, paymentId }) {
   const orders = read(ORDERS_KEY, []);
   const id = "OS" + String(Date.now()).slice(-6);
   const order = {
@@ -100,6 +100,7 @@ export function createOrder({ items, total, name, mobile, address, pincode, paym
     address: address.trim(),
     pincode: String(pincode).trim(),
     payment,
+    paymentId: paymentId || null,
     placedAt: Date.now(),
   };
   orders.unshift(order);
@@ -110,6 +111,13 @@ export function createOrder({ items, total, name, mobile, address, pincode, paym
 export function getOrder(id) {
   const orders = read(ORDERS_KEY, []);
   return orders.find((o) => o.id.toUpperCase() === String(id || "").trim().toUpperCase()) || null;
+}
+
+// Order ke payment mode ko friendly label me badalta hai.
+export function paymentLabel(payment) {
+  if (payment === "COD") return "Cash on Delivery";
+  if (payment === "ONLINE" || payment === "UPI") return "Online Payment";
+  return payment || "—";
 }
 
 // Order ko WhatsApp bot server par bhejo (owner ko notification chalega).

@@ -8,7 +8,7 @@ import {
   getStatusOverride,
   setStatusOverride,
 } from "../adminStore";
-import { orderStatus, formatDate } from "../store";
+import { orderStatus, formatDate, paymentLabel } from "../store";
 import { Stat, SectionTitle, Empty, Btn } from "./admin-ui";
 import { ProductsTab, CustomersTab, ReviewsTab, NewsletterTab, MessagesTab, SettingsTab } from "./AdminSections";
 
@@ -229,7 +229,7 @@ function OrdersTab({ refreshKey, bump }) {
                   <button type="button" onClick={() => setOpenId(open ? null : o.id)} className="text-left flex-1 min-w-[180px]">
                     <span className="font-bold text-[#1a1a1a]">{o.id}</span>
                     <span className="block text-xs text-gray-500">
-                      {o.name} · +91-{o.mobile} · ₹{o.total} · {o.payment} · {formatDate(o.placedAt)}
+                      {o.name} · +91-{o.mobile} · ₹{o.total} · {paymentLabel(o.payment)} · {formatDate(o.placedAt)}
                     </span>
                   </button>
                   <span className={`text-[11px] font-bold px-3 py-1 rounded-full whitespace-nowrap ${st.cancelled ? "text-red-600 bg-red-100" : "text-[#16a34a] bg-green-100"}`}>

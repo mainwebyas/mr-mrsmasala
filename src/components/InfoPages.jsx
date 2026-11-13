@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { getOrder, myOrders, currentUser, orderStatus, formatDate } from "../store";
+import { getOrder, myOrders, currentUser, orderStatus, formatDate, paymentLabel } from "../store";
 
 export function Ph({ children }) {
   return (
@@ -65,8 +65,8 @@ export function ShippingPage() {
         text="₹999 ya usse zyada ke order par delivery bilkul FREE hai. Usse kam ke order par nominal delivery charge lagta hai, jo checkout par dikh jayega."
       />
       <Point
-        heading="Cash on Delivery (COD)"
-        text="COD available hai — pehle product check karo, phir payment karo. UPI aur online payment ka option bhi hai."
+        heading="Payment options"
+        text="COD (Cash on Delivery) available hai — pehle product check karo, phir payment karo. Saath hi Online Payment ka option bhi hai — UPI, Credit/Debit Card aur Netbanking, Razorpay ke secure checkout se."
       />
       <Point
         heading="Packing"
@@ -105,7 +105,7 @@ export function TermsPage() {
 
       <Point
         heading="Pricing aur payment"
-        text="Saari keemtein INR (₹) me hain. Payment Cash on Delivery (COD) ya UPI se hota hai — payment ka intezam order confirm karte waqt hota hai. Website par card number/bank details nahi liye jaate. Order confirm hone ke baad price change nahi hota."
+        text="Saari keemtein INR (₹) me hain. Payment Cash on Delivery (COD) ya Online Payment (UPI / Credit-Debit Card / Netbanking — Razorpay ke through) se hota hai. Card aur bank details hum store nahi karte — wo aap seedha Razorpay ke secure checkout par daalte ho. Order confirm hone ke baad price change nahi hota."
       />
 
       <Point
@@ -304,7 +304,7 @@ export function TrackOrderPage() {
             <div>
               <p className="font-bold text-[#1a1a1a]">{order.id}</p>
               <p className="text-xs text-gray-500">
-                {formatDate(order.placedAt)} · ₹{order.total} · {order.payment === "COD" ? "Cash on Delivery" : "UPI"}
+                {formatDate(order.placedAt)} · ₹{order.total} · {paymentLabel(order.payment)}
               </p>
             </div>
             <span className="text-[11px] font-bold text-[#16a34a] bg-green-100 px-3 py-1 rounded-full">

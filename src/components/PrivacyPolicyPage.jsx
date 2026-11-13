@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
             <b>Google Sign-In (Firebase Authentication):</b> jab aap "Continue with Google" se login karte ho, Google aapse aapka <b>naam, email address</b> (aur agar Google de to profile photo) share karta hai. Ye jaankari Firebase Authentication ke through humein milti hai.
           </li>
           <li>
-            <b>Order details:</b> order karne par — naam, mobile number, delivery address, pincode, order ke items, total, aur payment ka tareeka (COD ya UPI). Ye jaankari order process/track karne ke liye istemal hoti hai.
+            <b>Order details:</b> order karne par — naam, mobile number, delivery address, pincode, order ke items, total, aur payment ka tareeka (COD ya Online). Online payment par Razorpay se payment ki ID/status bhi milti hai. Ye jaankari order process/track karne ke liye istemal hoti hai.
           </li>
           <li>
             <b>Technical information:</b> website host (Vercel) server ke basic logs process kar sakta hai — jaise IP address, time, aur kaunsi page request hui. Ye site chalane aur suraksha ke liye.
@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
           </li>
         </ul>
         <p className="mt-2 text-gray-500">
-          Hum website par <b>card number, bank details ya OTP</b> nahi maangte. Payment COD ya UPI se order confirm karte waqt hota hai.
+          Hum website par <b>card number, CVV, bank details ya OTP kabhi nahi maangte</b>. Online payment Razorpay ke secure checkout par hota hai — aapki card/UPI/bank details seedha Razorpay ke paas jaati hain, hamare paas save nahi hoti. COD ka payment delivery ke waqt hota hai.
         </p>
       </div>
 
@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
           </li>
         </ul>
         <p className="mt-2">
-          Payment website par nahi hota — COD ya UPI ka intezam order confirm karte waqt hota hai, aur usme aap seedha apne payment provider se deal karte ho.
+          Online payment <b>Razorpay</b> (payment gateway) ke through hota hai — card/UPI/netbanking details aap seedha Razorpay ko dete ho, hum unhe store nahi karte. Razorpay apni privacy policy ke hisaab se data process karta hai. COD ka payment delivery ke waqt hota hai.
         </p>
       </div>
 

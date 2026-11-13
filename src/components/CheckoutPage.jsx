@@ -4,6 +4,33 @@ import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { createOrder, getOrder, forwardOrder } from "../store";
 
+const RAZORPAY_SRC = "https://checkout.razorpay.com/v1/checkout.js";
+
+// Backend API base. Vercel par same-origin `/api/*` serverless functions hote hain.
+// Local `npm run dev` me Vercel functions nahi chalte, isliye testing ke liye
+// .env me VITE_PAYMENTS_API_URL=https://<your-site>.vercel.app set kar sakte ho.
+const API_BASE = String(import.meta.env.VITE_PAYMENTS_API_URL || "").replace(/\/+$/, "");
+const api = (path) => `${API_BASE}${path}`;
+
+// Razorpay checkout script ko ek hi baar load karta hai.
+function loadRazorpay() {
+  return new Promise((resolve, reject) => {
+    if (window.Razorpay) return resolve();
+    const existing = document.querySelector(`script[src="${RAZORPAY_SRC}"]`);
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject(new Error("Payment window load nahi hua.")));
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = RAZORPAY_SRC;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error("Payment window load nahi hua. Internet check karo."));
+    document.body.appendChild(s);
+  });
+}
+
 function Field({ label, ...props }) {
   return (
     <label className="block">
@@ -16,6 +43,11 @@ function Field({ label, ...props }) {
   );
 }
 
+const PAYMENT_OPTIONS = [
+  { id: "COD", label: "Cash on Delivery", hint: "Delivery par paisa dein" },
+  { id: "ONLINE", label: "Online Payment", hint: "UPI / Card / Netbanking" },
+];
+
 export function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const { user } = useAuth();
@@ -26,6 +58,7 @@ export function CheckoutPage() {
   const [pincode, setPincode] = useState("");
   const [payment, setPayment] = useState("COD");
   const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
 
   if (items.length === 0) {
     return (
@@ -43,19 +76,117 @@ export function CheckoutPage() {
   const delivery = cartTotal >= 999 ? 0 : 49;
   const grandTotal = cartTotal + delivery;
 
-  const placeOrder = (e) => {
-    e.preventDefault();
-    setError("");
-    if (!name.trim()) return setError("Apna naam likho.");
-    if (!/^[6-9]\d{9}$/.test(mobile.trim())) return setError("Sahi 10-digit mobile number dalo.");
-    if (!address.trim()) return setError("Pura delivery address likho.");
-    if (!/^\d{6}$/.test(pincode.trim())) return setError("Sahi 6-digit pincode dalo.");
+  const validate = () => {
+    if (!name.trim()) return "Apna naam likho.";
+    if (!/^[6-9]\d{9}$/.test(mobile.trim())) return "Sahi 10-digit mobile number dalo.";
+    if (!address.trim()) return "Pura delivery address likho.";
+    if (!/^\d{6}$/.test(pincode.trim())) return "Sahi 6-digit pincode dalo.";
+    return "";
+  };
+
+  // COD — seedha order ban jata hai.
+  const placeCodOrder = () => {
     const order = createOrder({
-      items, total: grandTotal, name, mobile, address, pincode, payment,
+      items, total: grandTotal, name, mobile, address, pincode, payment: "COD",
     });
     forwardOrder(order);
     clearCart();
     navigate(`/order-success/${order.id}`);
+  };
+
+  // Online — Razorpay checkout kholta hai, verify hone ke baad order banata hai.
+  const payOnline = async () => {
+    const res = await fetch(api("/api/create-order"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        items: items.map((i) => ({ id: i.id, qty: i.qty })),
+        name: name.trim(),
+        mobile: mobile.trim(),
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.orderId) {
+      throw new Error(data.error || "Payment shuru nahi ho paya. Dobara try karo.");
+    }
+
+    await loadRazorpay();
+
+    const order = await new Promise((resolve, reject) => {
+      const options = {
+        key: data.keyId,
+        amount: data.amount,
+        currency: data.currency || "INR",
+        name: "Mr & Mrs Masala",
+        description: `Order — ${items.length} item${items.length > 1 ? "s" : ""}`,
+        order_id: data.orderId,
+        prefill: { name: name.trim(), contact: mobile.trim(), email: user?.email || "" },
+        notes: { address: address.trim(), pincode: pincode.trim() },
+        theme: { color: "#16a34a" },
+        handler: async (response) => {
+          try {
+            const vres = await fetch(api("/api/verify-payment"), {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response),
+            });
+            const vdata = await vres.json().catch(() => ({}));
+            if (!vres.ok || !vdata.ok) {
+              throw new Error(vdata.error || "Payment verify nahi ho paya. WhatsApp par contact karo.");
+            }
+            const created = createOrder({
+              items,
+              total: data.total ?? grandTotal,
+              name,
+              mobile,
+              address,
+              pincode,
+              payment: "ONLINE",
+              paymentId: vdata.paymentId,
+            });
+            forwardOrder(created);
+            clearCart();
+            resolve(created);
+          } catch (err) {
+            reject(err);
+          }
+        },
+        modal: {
+          ondismiss: () => reject(new Error("Payment cancel ho gaya. Dobara try karo.")),
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", (resp) => {
+        const desc = resp && resp.error && resp.error.description;
+        reject(new Error(desc || "Payment fail ho gaya. Dobara try karo."));
+      });
+      rzp.open();
+    });
+
+    navigate(`/order-success/${order.id}`);
+  };
+
+  const placeOrder = async (e) => {
+    e.preventDefault();
+    if (busy) return;
+    setError("");
+    const msg = validate();
+    if (msg) return setError(msg);
+
+    if (payment === "COD") {
+      placeCodOrder();
+      return;
+    }
+
+    setBusy(true);
+    try {
+      await payOnline();
+    } catch (err) {
+      setError(err.message || "Payment me problem aayi. Dobara try karo.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -97,25 +228,39 @@ export function CheckoutPage() {
             <div>
               <span className="text-xs font-semibold text-gray-600">Payment</span>
               <div className="mt-1 grid grid-cols-2 gap-2">
-                {["COD", "UPI"].map((p) => (
+                {PAYMENT_OPTIONS.map((p) => (
                   <button
-                    key={p}
+                    key={p.id}
                     type="button"
-                    onClick={() => setPayment(p)}
-                    className={`py-2.5 rounded-xl text-sm font-bold border transition-colors ${
-                      payment === p
+                    onClick={() => setPayment(p.id)}
+                    className={`py-2.5 px-3 rounded-xl border text-left transition-colors ${
+                      payment === p.id
                         ? "bg-green-50 border-[#16a34a] text-[#16a34a]"
-                        : "border-gray-200 text-gray-500"
+                        : "border-gray-200 text-gray-500 hover:border-gray-300"
                     }`}
                   >
-                    {p === "COD" ? "Cash on Delivery" : "UPI"}
+                    <span className="block text-sm font-bold">{p.label}</span>
+                    <span className="block text-[10px] font-medium opacity-80">{p.hint}</span>
                   </button>
                 ))}
               </div>
+              {payment === "ONLINE" && (
+                <p className="mt-2 text-[11px] text-gray-500 flex items-center gap-1.5">
+                  <span>🔒</span> Razorpay dwara secure payment — UPI, Credit/Debit Card, Netbanking.
+                </p>
+              )}
             </div>
             {error && <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>}
-            <button type="submit" className="w-full py-3.5 bg-[#16a34a] hover:bg-[#15803d] text-white rounded-xl font-bold transition-colors">
-              Order Place Karo — ₹{grandTotal}
+            <button
+              type="submit"
+              disabled={busy}
+              className="w-full py-3.5 bg-[#16a34a] hover:bg-[#15803d] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors"
+            >
+              {busy
+                ? "Payment ho raha hai..."
+                : payment === "COD"
+                  ? `Order Place Karo — ₹${grandTotal}`
+                  : `Pay Online ₹${grandTotal}`}
             </button>
           </form>
 
@@ -163,6 +308,9 @@ export function OrderSuccessPage() {
     );
   }
 
+  const paymentLabel =
+    order.payment === "COD" ? "Cash on Delivery" : "Online (Razorpay)";
+
   return (
     <section className="pt-[124px] lg:pt-[148px] bg-gray-50 min-h-screen">
       <div className="max-w-xl mx-auto px-4 py-10 text-center">
@@ -178,8 +326,11 @@ export function OrderSuccessPage() {
           <p className="text-3xl font-bold text-[#16a34a] tracking-wider mt-1">{order.id}</p>
           <p className="text-xs text-gray-400 mt-2">Ye ID note kar lo — isi se order track hoga.</p>
           <p className="text-sm font-bold text-[#1a1a1a] mt-3">
-            Total: ₹{order.total} · {order.payment === "COD" ? "Cash on Delivery" : "UPI"}
+            Total: ₹{order.total} · {paymentLabel}
           </p>
+          {order.paymentId && (
+            <p className="text-[11px] text-gray-400 mt-1">Payment ID: {order.paymentId}</p>
+          )}
         </div>
         <div className="flex gap-3 justify-center mt-6">
           <Link to={`/track-order?orderId=${order.id}`} className="px-6 py-2.5 bg-[#1a1a1a] text-white text-sm font-bold rounded-xl">

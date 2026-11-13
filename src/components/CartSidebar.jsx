@@ -119,7 +119,7 @@ export default function CartSidebar() {
             >
               ya WhatsApp par order karo
             </a>
-            <p className="text-[11px] text-gray-400 text-center">COD available · Delivery 3-5 din mein</p>
+            <p className="text-[11px] text-gray-400 text-center">COD + Online Payment · Delivery 3-5 din mein</p>
           </div>
         )}
       </div>

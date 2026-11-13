@@ -139,17 +139,17 @@ export default function Header() {
 
       <div className="bg-[#1a1a1a] border-b border-[#2a2a2a]">
         <div className="relative max-w-[1440px] mx-auto px-4 h-[72px] flex items-center gap-4">
-          <div className="flex items-center gap-4 md:gap-6 shrink-0">
+          <div className="flex items-center gap-2 md:gap-6 shrink-0">
             <button onClick={() => setMobile(!mobile)} className="lg:hidden p-2 text-white hover:bg-white/10 rounded z-10">
               {mobile ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            <Link to="/" className="flex items-center gap-2 shrink-0 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:left-auto z-10">
-              <img src="/sitelogo.jpeg" alt="Mr & Mrs Masala" className="h-12 w-12 object-cover rounded-lg border border-white/20 bg-[#f7efdd]" />
+            <Link to="/" className="flex items-center gap-2 shrink-0 z-10">
+              <img src="/logo.png" alt="Mr & Mrs Masala" width="56" height="56" className="h-12 w-12 md:h-14 md:w-14 object-contain shrink-0" />
               <div className="hidden sm:block">
                 <span className="font-['Cormorant_Garamond'] text-xl font-bold text-white leading-tight block">Mr & Mrs Masala</span>
                 <span className="text-[9px] text-[#a8a8a8] tracking-[0.15em] uppercase">Pure Food. Pure Life.</span>
               </div>
-              <div className="sm:hidden flex flex-col items-center">
+              <div className="flex flex-col items-center sm:hidden">
                 <span className="font-['Cormorant_Garamond'] text-sm font-bold text-white leading-none">Mr & Mrs Masala</span>
                 <span className="text-[7px] text-[#a8a8a8] tracking-widest uppercase">Pure Food</span>
               </div>

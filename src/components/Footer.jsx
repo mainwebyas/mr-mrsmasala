@@ -65,7 +65,7 @@ export default function Footer() {
               inputMode="email"
               className="flex-1 h-10 px-4 bg-white text-sm text-[#1a1a1a] rounded-l outline-none"
             />
-            <button className="bg-[#16a34a] hover:bg-[#15803d] text-white px-6 text-xs font-bold tracking-widest rounded-r">SUBSCRIBE</button>
+            <button className="bg-[#16a34a] hover:bg-[#15803d] text-white px-3 sm:px-6 text-xs font-bold tracking-widest rounded-r whitespace-nowrap">SUBSCRIBE</button>
           </form>
           {newsMsg.text && (
             <p className={`text-xs w-full lg:w-auto ${newsMsg.type === "ok" ? "text-green-400" : "text-red-400"}`}>
@@ -114,7 +114,7 @@ export default function Footer() {
           {/* About - preserve images */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-3">
-              <img src="/sitelogo.jpeg" alt="Mr & Mrs Masala" className="h-9 w-9 object-cover rounded-md border border-white/20 bg-[#f7efdd]" />
+              <img src="/logo.png" alt="Mr & Mrs Masala" width="48" height="48" className="h-12 w-12 object-contain shrink-0" />
               <div>
                 <span className="font-['Cormorant_Garamond'] text-lg font-bold text-white">Mr & Mrs Masala</span>
                 <span className="block text-[9px] text-[#a8a8a8] tracking-wider uppercase">100% Organic Masala</span>
@@ -187,7 +187,7 @@ export default function Footer() {
               <div className="flex gap-1 flex-wrap opacity-80">
                 <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">VISA</span>
                 <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">MC</span>
-                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">PAYPAL</span>
+                <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">RUPAY</span>
                 <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">UPI</span>
                 <span className="bg-white text-[#1a1a1a] text-[9px] font-bold px-2 py-1 rounded">COD</span>
               </div>

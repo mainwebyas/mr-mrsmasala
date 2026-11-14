@@ -62,7 +62,7 @@ export function ShippingPage() {
       />
       <Point
         heading="Delivery charges"
-        text="₹999 ya usse zyada ke order par delivery bilkul FREE hai. Usse kam ke order par nominal delivery charge lagta hai, jo checkout par dikh jayega."
+        text="₹499 ya usse zyada ke order par delivery bilkul FREE hai. Usse kam ke order par nominal delivery charge lagta hai, jo checkout par dikh jayega."
       />
       <Point
         heading="Payment options"

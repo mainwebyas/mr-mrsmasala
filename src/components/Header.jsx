@@ -20,7 +20,7 @@ const departments = [
   { name: "Powdered Spices", slug: "single-spice", icon: "🌿", sub: ["Haldi Powder", "Lal Mirch Powder", "Dhaniya Powder", "Jeera Powder"] },
   { name: "Blended Spices", slug: "blend", icon: "🍛", sub: ["Organic Garam Masala"] },
   { name: "Combo Packs", slug: "combo", icon: "🎁", sub: ["Complete Organic Combo", "Free Delivery"] },
-  { name: "Offers", slug: "combo", icon: "🔥", sub: ["Combo me 25%+ Off", "Free Delivery ₹999+"] },
+  { name: "Offers", slug: "combo", icon: "🔥", sub: ["Combo me 25%+ Off", "Free Delivery ₹499+"] },
 ];
 
 function normalize(str) {
@@ -288,7 +288,7 @@ export default function Header() {
           <a href="#testimonials" onClick={(e) => handleHashNav(e, "testimonials")} className="hover:text-[#16a34a] cursor-pointer">Reviews</a>
           <a href="#contact" onClick={(e) => handleHashNav(e, "contact")} className="hover:text-[#16a34a] cursor-pointer">Contact</a>
           <span className="ml-auto flex items-center gap-2 text-[#1a1a1a]">
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Free shipping on orders over ₹999
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Free shipping on orders over ₹499
           </span>
         </div>
       </div>

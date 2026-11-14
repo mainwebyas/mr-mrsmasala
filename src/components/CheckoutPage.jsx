@@ -73,7 +73,7 @@ export function CheckoutPage() {
     );
   }
 
-  const delivery = cartTotal >= 999 ? 0 : 49;
+  const delivery = cartTotal >= 499 ? 0 : 49;
   const grandTotal = cartTotal + delivery;
 
   const validate = () => {

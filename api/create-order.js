@@ -6,7 +6,7 @@
 
 import { products } from "../src/data.js";
 
-const FREE_DELIVERY_ABOVE = 999;
+const FREE_DELIVERY_ABOVE = 499;
 const DELIVERY_FEE = 49;
 
 const PRICES = new Map(products.map((p) => [Number(p.id), Number(p.price)]));

@@ -120,7 +120,7 @@ export const trustCards = [
   { icon: "📋", title: "FSSAI Certified", desc: "Government approved quality standards. Har batch test hota hai, aap bharosa kar sakte ho." },
   { icon: "🔬", title: "Lab Tested Har Batch", desc: "Koi heavy metal nahi, koi pesticide nahi. Har baar jab masala bike, usse pehle lab me check hota hai." },
   { icon: "📦", title: "Hygienic Packaging", desc: "Airtight packing me aata hai masala — freshness bani rahe, khusboo ude nahi. Reusable dabba bhi milega." },
-  { icon: "🚚", title: "Free Delivery ₹999 se zyada", desc: "₹999 se upar ka order ho to delivery free hai. Seedha aapke darwaze tak — koi hidden charges nahi." },
+  { icon: "🚚", title: "Free Delivery ₹499 se zyada", desc: "₹499 se upar ka order ho to delivery free hai. Seedha aapke darwaze tak — koi hidden charges nahi." },
   { icon: "💬", title: "WhatsApp Support 24/7", desc: "Koi bhi sawaal ho, seedha WhatsApp karo — hamari team jawaab degi, robot nahi, insaan." },
 ];
 

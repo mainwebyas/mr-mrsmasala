@@ -89,13 +89,6 @@ export default function Footer() {
                 <Youtube className="w-3.5 h-3.5" />
               </a>
             )}
-            <a href="https://wa.me/919355701335" target="_blank" rel="noopener noreferrer" title="WhatsApp" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white text-xs transition-colors">WA</a>
-            <a href="tel:+919355701335" title="Call karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
-              <Phone className="w-3.5 h-3.5" />
-            </a>
-            <a href="mailto:mrandmrsmasala9355@gmail.com" title="Email karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
-              <Mail className="w-3.5 h-3.5" />
-            </a>
           </div>
         </div>
       </div>

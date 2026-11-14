@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { siteConfig } from "../data";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from "lucide-react";
 
 const NEWS_KEY = "os_newsletter";
 
@@ -74,6 +74,21 @@ export default function Footer() {
           )}
           <div className="flex items-center gap-2 text-xs">
             <span className="hidden lg:inline text-[#a8a8a8]">Follow:</span>
+            {siteConfig.links.instagram && (
+              <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {siteConfig.links.facebook && (
+              <a href={siteConfig.links.facebook} target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+            )}
+            {siteConfig.links.youtube && (
+              <a href={siteConfig.links.youtube} target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
+                <Youtube className="w-3.5 h-3.5" />
+              </a>
+            )}
             <a href="https://wa.me/919355701335" target="_blank" rel="noopener noreferrer" title="WhatsApp" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white text-xs transition-colors">WA</a>
             <a href="tel:+919355701335" title="Call karo" className="w-8 h-8 bg-[#2a2a2a] hover:bg-[#16a34a] rounded-full flex items-center justify-center text-white transition-colors">
               <Phone className="w-3.5 h-3.5" />

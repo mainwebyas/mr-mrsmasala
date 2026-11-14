@@ -2,7 +2,7 @@ export const siteConfig = {
   brand: { name: "Mr & Mrs Masala", tagline: "Pure organic spices, pure organic swad", logo: "🌿" },
   links: {
     whatsapp: "https://wa.me/919355701335",
-    instagram: "",
+    instagram: "https://www.instagram.com/mr.mrsmasala",
     facebook: "https://www.facebook.com/share/1CTQJpARNB/",
     youtube: "https://www.youtube.com/@Mr-MrsMasala",
   },
